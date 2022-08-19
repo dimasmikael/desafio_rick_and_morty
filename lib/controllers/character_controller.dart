@@ -15,9 +15,17 @@ class CharacterController {
   characters (page:\$page){
   
     results {
+       id
       name
       gender
       image
+      status
+       location{
+        id
+        name
+        dimension
+    
+      }
       
     }
   }

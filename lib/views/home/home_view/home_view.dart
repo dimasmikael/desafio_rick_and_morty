@@ -1,6 +1,7 @@
 import 'package:desafio_rick_and_morty/controllers/character_controller.dart';
 import 'package:desafio_rick_and_morty/models/character_model.dart';
 import 'package:desafio_rick_and_morty/shared/base-service/base.service.dart';
+import 'package:desafio_rick_and_morty/shared/style/style_text.dart';
 import 'package:desafio_rick_and_morty/views/home/home_view/widgets/list_characters_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -37,9 +38,6 @@ class _HomeViewState extends State<HomeView>
         ...?this.characters,
         ...?loadCharacters
       ];
-      // if (characters?.length == 0) {
-      //   BaseService.alert.error(context!, 'Sem mais produtos');
-      // }
 
       setState(
         () {
@@ -50,7 +48,7 @@ class _HomeViewState extends State<HomeView>
       if (context != null) ;
       BaseService.loading.stopLoading(this.context);
     } else {
-      BaseService.alert.error(context!, 'Sem mais produtos');
+      BaseService.alert.error(context!, 'no more characters');
     }
   }
 
@@ -73,7 +71,8 @@ class _HomeViewState extends State<HomeView>
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Rick and Morty'),
+          title:  textAppBar('Rick and Morty'),
+          centerTitle: true,
         ),
         body: Padding(
             padding: EdgeInsets.all(8),

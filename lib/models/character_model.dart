@@ -1,34 +1,36 @@
 import 'dart:convert';
 
+import 'package:desafio_rick_and_morty/models/location_model.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class CharacterModel {
   CharacterModel({
     required this.id,
     required this.name,
-    // required this.status,
+    required this.status,
     // required this.species,
     // required this.type,
-    // required this.gender,
+    required this.gender,
     // // required this.origin,
     // // required this.location,
-    // required this.image,
+    required this.image,
     // required this.episode,
-    required this.url,
+
     // required this.created,
   });
 
   int? id;
   String? name;
-  // final String status;
+  LocationModel? location;
+  String? status;
   // final String species;
   // final String type;
-  // final String gender;
+  String? gender;
   // // final CharacterLocation origin;
   // // final CharacterLocation location;
- String? image;
+  String? image;
   // final List<String> episode;
-  String? url;
+
   // final DateTime created;
 
   // factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
@@ -47,19 +49,19 @@ class CharacterModel {
   // );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    // "status": status,
-    // "species": species,
-    // "type": type,
-    // "gender": gender,
-    // // "origin": origin.toJson(),
-    // // "location": location.toJson(),
-     "image": image,
-    // "episode": List<dynamic>.from(episode.map((x) => x)),
-    "url": url,
-    // "created": created.toIso8601String(),
-  };
+        "id": id,
+        "name": name,
+        // "status": status,
+        // "species": species,
+        // "type": type,
+        // "gender": gender,
+        // // "origin": origin.toJson(),
+        // // "location": location.toJson(),
+        "image": image,
+        // "episode": List<dynamic>.from(episode.map((x) => x)),
+
+        // "created": created.toIso8601String(),
+      };
 
   static List<CharacterModel> createCharactersFromArray(
       String queryName, QueryResult resultado) {
@@ -71,16 +73,22 @@ class CharacterModel {
       print(resultado.exception);
     }
 
-    map[queryName]['results']
-        .forEach((character) => {characters.add( CharacterModel.fromMap(character))});
+    map[queryName]['results'].forEach(
+        (character) => {characters.add(CharacterModel.fromMap(character))});
 
     return characters;
   }
 
   CharacterModel.fromMap(Map<String, dynamic> map) {
-    id= (map["id"]);
-    name = map["name"]; image = map["image"];url = map["url"];
+    name = map["name"];
+    gender = map["gender"];
+    image = map["image"];
+    status = map["status"];
 
+    if (map["location"] != null) {
+      this.location = LocationModel.fromMap(
+        map["location"],
+      );
+    }
   }
 }
-

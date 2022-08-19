@@ -4,7 +4,7 @@ import 'alerts/alert.dart';
 import 'loading/loading.dart';
 
 abstract class BaseService {
-  static Alert alert = new Alert();
-  static Loading loading = new Loading();
-  static SystemColors systemColors = new SystemColors();
+  static Alert alert = Alert();
+  static Loading loading = Loading();
+  static SystemColors systemColors = SystemColors();
 }

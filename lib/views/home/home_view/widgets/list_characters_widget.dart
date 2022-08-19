@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:desafio_rick_and_morty/models/character_model.dart';
-import 'package:desafio_rick_and_morty/shared/placeHolder/placeHolderImage.dart';
+import 'package:desafio_rick_and_morty/shared/placeHolder/place-holder-image.dart';
 import 'package:desafio_rick_and_morty/shared/size-config/size-config.dart';
 import 'package:desafio_rick_and_morty/shared/style/style_text.dart';
 
@@ -67,11 +67,44 @@ class ListCharactersWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         textNameCharacter(
-                          character?.name ?? "",
+                          character.name ?? "",
+                        ),
+                        textInfoCharacter(
+                          'Status: ${character.status ?? ""} -  Gender: ${character.gender ?? ""} ',
                         ),
                       ],
                     ),
                   ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  character.location?.name == null ||
+                          character.location?.name == ""
+                      ? SizedBox(
+                          height: SizeConfig.safeBlockVertical! * 2.5,
+                        )
+                      : Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 1, top: 1, bottom: 5),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Icon(
+                                  Icons.location_on,
+                                  color: Colors.grey[600],
+                                  size: SizeConfig.safeBlockVertical! * 2.8,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            textLocationCharacter(
+                              character.location?.name ?? "",
+                            ),
+                          ],
+                        ),
                 ],
               ),
             ),
