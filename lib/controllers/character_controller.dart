@@ -1,22 +1,19 @@
-import 'dart:convert';
-
 import 'package:desafio_rick_and_morty/models/character_model.dart';
-import 'package:flutter/material.dart';
+import 'package:desafio_rick_and_morty/shared/graphql/grahpql-error.dart';
+import 'package:desafio_rick_and_morty/shared/graphql/graphql-configuration.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class CharacterController {
- Future<List<CharacterModel>> getCharacters() async {
+  Future<List<CharacterModel>> getCharacters(int? paginacao) async {
     GraphQLClient _client = GraphQLConfiguration().client();
-    // String baseUrl = Constants.BASE_URL_DOG;
-    //
-    // var client = http.Client();
 
     try {
       QueryResult resultado = await _client.query(
         QueryOptions(
           document: gql("""
- query {
-  characters {
+ query (\$page: Int!){
+  characters (page:\$page){
+  
     results {
       name
       gender
@@ -26,14 +23,15 @@ class CharacterController {
   }
 
 }
-      """),fetchPolicy: FetchPolicy.noCache
-          // variables: {
-          //   "celular": celular,
-          //   "id": id,
-          // },
+      """),
+          fetchPolicy: FetchPolicy.noCache,
+          variables: {
+            'page': paginacao!,
+          },
         ),
       );
-
+      print("paginacao!.take");
+      print(paginacao!);
       GrahpqlError.checkQueryError(resultado);
       print(resultado);
       return CharacterModel.createCharactersFromArray("characters", resultado);
@@ -42,29 +40,6 @@ class CharacterController {
       // return err;
       print("dhdssssh");
       return Future.error(err);
-    }
-  }
-}
-
-class GraphQLConfiguration {
-  Link? link;
-
-  GraphQLClient client() {
-    return GraphQLClient(
-      cache: GraphQLCache(),
-      link: HttpLink('https://rickandmortyapi.com/graphql'),
-    );
-  }
-}
-
-abstract class GrahpqlError {
-  static void checkQueryError(QueryResult e) {
-    if (e.hasException) {
-      if (e.exception!.graphqlErrors.isEmpty) {
-        print(e.exception!.linkException!.originalException);
-        throw Exception(e.exception!.linkException!.originalException);
-      }
-      throw Exception(e.exception?.graphqlErrors[0].message);
     }
   }
 }
