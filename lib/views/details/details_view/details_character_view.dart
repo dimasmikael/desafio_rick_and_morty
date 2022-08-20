@@ -14,6 +14,7 @@ class DetailsCharacterView extends StatelessWidget {
     this.character,
   }) : super(key: key);
   final CharacterModel? character;
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -21,7 +22,6 @@ class DetailsCharacterView extends StatelessWidget {
       appBar: const CustomAppBarWidget(texto: 'Details - Characters'),
       body: SingleChildScrollView(
         child: Column(
-
           children: [
             SizedBox(
               height: SizeConfig.safeBlockVertical! * 65,

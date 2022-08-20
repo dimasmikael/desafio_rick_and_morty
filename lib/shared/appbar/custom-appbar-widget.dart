@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class CustomAppBarWidget extends StatefulWidget with PreferredSizeWidget {
   const CustomAppBarWidget({Key? key, required this.texto}) : super(key: key);
+  @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   final String? texto;
 

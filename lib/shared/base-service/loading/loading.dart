@@ -9,13 +9,12 @@ class Loading {
     showDialog(
       context: context,
       barrierDismissible: false,
-      barrierColor: Color.fromRGBO(0, 0, 0, 0.5),
-      builder: (BuildContext context) => Container(
-          child: Center(
-              child: SpinKitWave(
+      barrierColor: const Color.fromRGBO(0, 0, 0, 0.5),
+      builder: (BuildContext context) => const Center(
+          child: SpinKitWave(
         color: Colors.amber,
         size: 50.0,
-      ))),
+      )),
     );
   }
 

@@ -27,11 +27,11 @@ class ListCharactersWidget extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         itemCount: characters!.length,
         itemBuilder: (BuildContext context, int index) {
-          return characters![index]!
+          return characters![index]
                       .name!
                       .toLowerCase()
                       .contains(searchCharacterFilter!) ||
-                  characters![index]!
+                  characters![index]
                       .status!
                       .toLowerCase()
                       .contains(searchCharacterFilter!)
@@ -39,11 +39,14 @@ class ListCharactersWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: GestureDetector(
                     onTap: () {
+                      FocusScope.of(context).unfocus();
+                      TextEditingController().clear();
                       Navigator.push(
                         context,
                         PageRouteBuilder(
                           pageBuilder: (context, a, b) => DetailsCharacterView(
-                              character: characters![index]),
+                            character: characters![index],
+                          ),
                         ),
                       );
                     },

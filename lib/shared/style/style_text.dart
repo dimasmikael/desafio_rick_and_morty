@@ -2,11 +2,11 @@ import 'package:desafio_rick_and_morty/shared/size-config/size-config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget textAppBar(String texto) {
+Widget textAppBar(String text) {
   return Align(
     alignment: Alignment.center,
     child: Text(
-      texto,
+      text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: GoogleFonts.roboto(
@@ -17,13 +17,13 @@ Widget textAppBar(String texto) {
   );
 }
 
-Widget textNameCharacter(String texto) {
+Widget textNameCharacter(String text) {
   return Padding(
     padding: const EdgeInsets.only(left: 1, top: 1, bottom: 1),
     child: Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        texto,
+        text,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: GoogleFonts.inter(
@@ -35,13 +35,13 @@ Widget textNameCharacter(String texto) {
   );
 }
 
-Widget textLocationCharacter(String texto) {
+Widget textLocationCharacter(String text) {
   return Padding(
     padding: const EdgeInsets.only(left: 1, top: 5, bottom: 5),
     child: Align(
       alignment: Alignment.bottomLeft,
       child: Text(
-        texto,
+        text,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: GoogleFonts.inter(
@@ -52,13 +52,13 @@ Widget textLocationCharacter(String texto) {
   );
 }
 
-Widget textInfoCharacter(String texto) {
+Widget textInfoCharacter(String text) {
   return Padding(
     padding: const EdgeInsets.only(left: 1, top: 1, bottom: 5),
     child: Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        texto,
+        text,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: GoogleFonts.inter(
@@ -69,14 +69,13 @@ Widget textInfoCharacter(String texto) {
   );
 }
 
-
-Widget textTitle(String texto) {
+Widget textTitle(String text) {
   return Padding(
     padding: const EdgeInsets.only(left: 1, top: 1, bottom: 1),
     child: Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        texto,
+        text,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: GoogleFonts.inter(
@@ -88,14 +87,13 @@ Widget textTitle(String texto) {
   );
 }
 
-
-Widget textInfoCharacterDetails(String texto) {
+Widget textInfoCharacterDetails(String text) {
   return Padding(
     padding: const EdgeInsets.all(5),
     child: Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        texto,
+        text,
         maxLines: 5,
         overflow: TextOverflow.ellipsis,
         style: GoogleFonts.roboto(
