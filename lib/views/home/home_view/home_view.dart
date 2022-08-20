@@ -1,6 +1,7 @@
 import 'package:desafio_rick_and_morty/controllers/character_controller.dart';
 import 'package:desafio_rick_and_morty/models/character_model.dart';
 import 'package:desafio_rick_and_morty/shared/base-service/base.service.dart';
+import 'package:desafio_rick_and_morty/shared/size-config/size-config.dart';
 import 'package:desafio_rick_and_morty/shared/style/style_text.dart';
 import 'package:desafio_rick_and_morty/views/home/home_view/widgets/list_characters_widget.dart';
 import 'package:flutter/material.dart';
@@ -52,13 +53,14 @@ class _HomeViewState extends State<HomeView>
     }
   }
 
+  String searchString = "";
   @override
   Widget build(BuildContext context) {
     print("characters?.length ??0");
     print(characters?.length ?? 0);
     print("paginacao");
     print(paginacao);
-
+    SizeConfig().init(context);
     super.build(context);
     return NotificationListener<ScrollEndNotification>(
       onNotification: (ScrollNotification notification) {
@@ -70,14 +72,44 @@ class _HomeViewState extends State<HomeView>
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          title:  textAppBar('Rick and Morty'),
-          centerTitle: true,
-        ),
-        body: Padding(
-            padding: EdgeInsets.all(8),
-            child: ListCharactersWidget(characters: characters)),
-      ),
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            title: textAppBar('Rick and Morty'),
+            centerTitle: true,
+          ),
+          body: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(
+                        () {
+                          searchString = value.toLowerCase();
+                        },
+                      );
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      labelText: 'Search',
+                      hintText: 'Search',
+                      suffixIcon: const Icon(Icons.search),
+                    ),
+                  ),
+                ),
+                Expanded(child:
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ListCharactersWidget(characters: characters,searchString:searchString)),),
+              ])
+
+          ),
     );
   }
 
