@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:desafio_rick_and_morty/models/character_model.dart';
+import 'package:desafio_rick_and_morty/shared/appbar/custom-appbar-widget.dart';
 import 'package:desafio_rick_and_morty/shared/card/custom-card/custom-card-widget.dart';
 import 'package:desafio_rick_and_morty/shared/placeHolder/place-holder-image.dart';
 import 'package:desafio_rick_and_morty/shared/size-config/size-config.dart';
@@ -17,23 +18,10 @@ class DetailsCharacterView extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      appBar: const CustomAppBarWidget(texto: 'Details - Characters'),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+
           children: [
             SizedBox(
               height: SizeConfig.safeBlockVertical! * 65,
@@ -48,7 +36,7 @@ class DetailsCharacterView extends StatelessWidget {
                         bottomRight: Radius.circular(5),
                       ),
                       image: DecorationImage(
-                          image: imageProvider, fit: BoxFit.contain),
+                          image: imageProvider, fit: BoxFit.cover),
                     ),
                   ),
                   placeholder: (context, i) =>

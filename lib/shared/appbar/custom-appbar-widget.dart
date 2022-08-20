@@ -15,14 +15,16 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-        preferredSize: Size.fromHeight(
-          SizeConfig.blockSizeVertical! * 12,
-        ),
-        child: AppBar(
-          centerTitle: true,
-          elevation: 2,
-          iconTheme: IconThemeData(size: SizeConfig.safeBlockHorizontal! * 6),
-          title: textAppBar(widget!.texto!),
-        ));
+      preferredSize: Size.fromHeight(
+        SizeConfig.blockSizeVertical! * 12,
+      ),
+      child: AppBar(
+        centerTitle: true,
+        elevation: 2,
+        iconTheme: IconThemeData(
+            size: SizeConfig.safeBlockHorizontal! * 6, color: Colors.white),
+        title: textAppBar(widget.texto!),
+      ),
+    );
   }
 }

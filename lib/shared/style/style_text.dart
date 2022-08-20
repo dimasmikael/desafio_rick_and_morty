@@ -96,7 +96,7 @@ Widget textInfoCharacterDetails(String texto) {
       alignment: Alignment.centerLeft,
       child: Text(
         texto,
-        maxLines: 1,
+        maxLines: 5,
         overflow: TextOverflow.ellipsis,
         style: GoogleFonts.roboto(
           fontSize: SizeConfig.safeBlockHorizontal! * 5,

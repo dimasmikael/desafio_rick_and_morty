@@ -3,7 +3,7 @@ import 'package:desafio_rick_and_morty/models/character_model.dart';
 import 'package:desafio_rick_and_morty/shared/appbar/custom-appbar-widget.dart';
 import 'package:desafio_rick_and_morty/shared/base-service/base.service.dart';
 import 'package:desafio_rick_and_morty/shared/size-config/size-config.dart';
-import 'package:desafio_rick_and_morty/shared/style/style_text.dart';
+
 import 'package:desafio_rick_and_morty/views/home/home_view/widgets/list_characters_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -16,66 +16,75 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView>
     with AutomaticKeepAliveClientMixin<HomeView> {
-  CharacterController? _characterController = CharacterController();
-  late int paginacao = 1;
+  final CharacterController _characterController = CharacterController();
+  late int pagination = 1;
   List<CharacterModel>? characters = [];
-  BuildContext? _context;
+  String searchCharacterFilter = "";
+  final focusNode = FocusNode();
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _loadCharacters(paginacao),
+      (_) => _loadCharacters(pagination),
     );
     super.initState();
   }
 
-  Future<void> _loadCharacters(paginacao) async {
-    if (paginacao != null) {
-      if (context != null) ;
-      BaseService.loading.startLoading(this.context);
+  Future<void> _loadCharacters(pagination) async {
+    try {
+      print(1);
+      if (pagination != null) {
+        BaseService.loading.startLoading(context);
+        print(2);
+        List<CharacterModel>? loadCharacters =
+            await _characterController?.getCharacters(pagination);
+        List<CharacterModel> newList = [...?characters, ...?loadCharacters];
+        print(3);
+        setState(
+          () {
+            characters = newList;
+          },
+        );
 
-      List<CharacterModel>? loadCharacters =
-          await _characterController?.getCharacters(paginacao);
-      List<CharacterModel> _listaNova = [
-        ...?this.characters,
-        ...?loadCharacters
-      ];
+        if(loadCharacters!.isEmpty){
+          BaseService.loading.stopLoading(context);
+          BaseService.alert.error(context!, 'no more characters');
 
-      setState(
-        () {
-          this.characters = _listaNova;
-        },
-      );
-
-      if (context != null) ;
-      BaseService.loading.stopLoading(this.context);
-    } else {
-      BaseService.alert.error(context!, 'no more characters');
+          print("nonono");
+        }
+        print("loadCharacters");  print(loadCharacters!.length); print("characters ");  print(characters!.length );
+        print(4);
+        BaseService.loading.stopLoading(context);
+        print(5);
+      } else {
+        print(6);
+        BaseService.alert.error(context!, 'no more characters');
+        BaseService.loading.stopLoading(context);
+        print(7);
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
-  String searchString = "";
   @override
   Widget build(BuildContext context) {
-    print("characters?.length ??0");
-    print(characters?.length ?? 0);
-    print("paginacao");
-    print(paginacao);
     SizeConfig().init(context);
     super.build(context);
     return NotificationListener<ScrollEndNotification>(
       onNotification: (ScrollNotification notification) {
         if (notification.metrics.pixels ==
             notification.metrics.maxScrollExtent) {
-          ++paginacao;
-          _loadCharacters(paginacao);
+          ++pagination;
+          _loadCharacters(pagination);
         }
         return true;
       },
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: const CustomAppBarWidget(texto: 'Rick and Morty'),
-          body: Column(
+          body:SizedBox(height:  SizeConfig.blockSizeVertical! * 85,child:
+          Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,10 +93,11 @@ class _HomeViewState extends State<HomeView>
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: TextField(
+                    focusNode: focusNode,
                     onChanged: (value) {
                       setState(
                         () {
-                          searchString = value.toLowerCase();
+                          searchCharacterFilter = value.toLowerCase();
                         },
                       );
                     },
@@ -105,9 +115,10 @@ class _HomeViewState extends State<HomeView>
                   child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: ListCharactersWidget(
-                          characters: characters, searchString: searchString)),
+                          characters: characters,
+                          searchCharacterFilter: searchCharacterFilter)),
                 ),
-              ])),
+              ])),),
     );
   }
 

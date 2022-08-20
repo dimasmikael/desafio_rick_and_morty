@@ -1,4 +1,5 @@
 import 'package:desafio_rick_and_morty/models/character_model.dart';
+import 'package:desafio_rick_and_morty/shared/base-service/base.service.dart';
 import 'package:desafio_rick_and_morty/shared/graphql/grahpql-error.dart';
 import 'package:desafio_rick_and_morty/shared/graphql/graphql-configuration.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -42,6 +43,7 @@ class CharacterController {
       print(paginacao!);
       GrahpqlError.checkQueryError(resultado);
       print(resultado);
+
       return CharacterModel.createCharactersFromArray("characters", resultado);
     } catch (err) {
       print(err);
