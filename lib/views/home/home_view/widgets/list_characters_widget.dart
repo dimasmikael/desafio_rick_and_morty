@@ -3,6 +3,7 @@ import 'package:desafio_rick_and_morty/models/character_model.dart';
 import 'package:desafio_rick_and_morty/shared/placeHolder/place-holder-image.dart';
 import 'package:desafio_rick_and_morty/shared/size-config/size-config.dart';
 import 'package:desafio_rick_and_morty/shared/style/style_text.dart';
+import 'package:desafio_rick_and_morty/views/details/details_view/details_character_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,7 +21,11 @@ class ListCharactersWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 10),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+
+
+
+            },
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
@@ -80,12 +85,8 @@ class ListCharactersWidget extends StatelessWidget {
                   const SizedBox(
                     height: 2,
                   ),
-                  character.location?.name == null ||
-                          character.location?.name == ""
-                      ? SizedBox(
-                          height: SizeConfig.safeBlockVertical! * 2.5,
-                        )
-                      : Row(
+
+                  Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
@@ -95,13 +96,11 @@ class ListCharactersWidget extends StatelessWidget {
                                 child: Icon(
                                   Icons.location_on,
                                   color: Colors.grey[600],
-                                  size: SizeConfig.safeBlockVertical! * 2.8,
+                                  size: SizeConfig.safeBlockVertical! * 3,
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 4,
-                            ),
+
                             textLocationCharacter(
                               character.location?.name ?? "",
                             ),
@@ -128,16 +127,27 @@ class ListCharactersWidget extends StatelessWidget {
           itemCount: characters!.length,
           itemBuilder: (BuildContext context, int index) {
             return characters![index]!
-                    .name!
-                    .toLowerCase()
-                    .contains(searchString!) || characters![index]!
-                .status!
-                .toLowerCase()
-                .contains(searchString!)
+                        .name!
+                        .toLowerCase()
+                        .contains(searchString!) ||
+                    characters![index]!
+                        .status!
+                        .toLowerCase()
+                        .contains(searchString!)
                 ? Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+
+
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, a, b) =>
+                                DetailsCharacterView(character: characters![index]),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: SizeConfig.blockSizeVertical! * 100,
                         decoration: BoxDecoration(
@@ -187,19 +197,15 @@ class ListCharactersWidget extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  textNameCharacter(
-                                    characters?[index].name ?? "",
-                                  ),
-                                  textInfoCharacter(
-                                    'Status: ${characters?[index].status ?? ""} -  Gender: ${characters?[index].gender ?? ""} ',
-                                  ),
-                                ],
-                              ),
+                           Container(height: SizeConfig.blockSizeVertical! * 18,
+                             child:
+                               Padding(padding: EdgeInsets.all(5),child:
+                           Column(children: [
+                            textNameCharacter(
+                              characters?[index].name ?? "",
+                            ),
+                            textInfoCharacter(
+                              'Status: ${characters?[index].status ?? ""} -  Gender: ${characters?[index].gender ?? ""} ',
                             ),
                             const SizedBox(
                               height: 2,
@@ -233,6 +239,7 @@ class ListCharactersWidget extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+                           ],),),),
                           ],
                         ),
                       ),

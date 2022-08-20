@@ -1,5 +1,6 @@
 import 'package:desafio_rick_and_morty/controllers/character_controller.dart';
 import 'package:desafio_rick_and_morty/models/character_model.dart';
+import 'package:desafio_rick_and_morty/shared/appbar/custom-appbar-widget.dart';
 import 'package:desafio_rick_and_morty/shared/base-service/base.service.dart';
 import 'package:desafio_rick_and_morty/shared/size-config/size-config.dart';
 import 'package:desafio_rick_and_morty/shared/style/style_text.dart';
@@ -73,10 +74,7 @@ class _HomeViewState extends State<HomeView>
       },
       child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: textAppBar('Rick and Morty'),
-            centerTitle: true,
-          ),
+          appBar: const CustomAppBarWidget(texto: 'Rick and Morty'),
           body: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -103,13 +101,13 @@ class _HomeViewState extends State<HomeView>
                     ),
                   ),
                 ),
-                Expanded(child:
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: ListCharactersWidget(characters: characters,searchString:searchString)),),
-              ])
-
-          ),
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: ListCharactersWidget(
+                          characters: characters, searchString: searchString)),
+                ),
+              ])),
     );
   }
 
