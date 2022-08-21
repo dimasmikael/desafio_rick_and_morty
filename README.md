@@ -9,8 +9,8 @@ A aplicação consiste em uma listagem dos personagens de série, aonde é poss�
 
 
 ## Layout mobile
-![Mobile 1](https://github.com/dimasmikael/desafio_rick_and_morty/blob/master/lib/Screenshots/Screenshot_homeview.png) 
-![Mobile 2](https://github.com/dimasmikael/desafio_rick_and_morty/blob/master/lib/Screenshots/Screenshot_detailsview.png)
+![Mobile 1](https://github.com/dimasmikael/desafio_rick_and_morty/blob/master/lib/screenshots/Screenshot_homeview.png) 
+![Mobile 2](https://github.com/dimasmikael/desafio_rick_and_morty/blob/master/lib/screenshots/Screenshot_detailsview.png)
 
 
 # Tecnologias utilizadas
