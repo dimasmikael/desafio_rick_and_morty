@@ -101,6 +101,7 @@ class _HomeViewState extends State<HomeView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: TextField(
+                  key: const Key("addField"),
                   textInputAction: TextInputAction.next,
                   onChanged: (value) {
                     setState(
