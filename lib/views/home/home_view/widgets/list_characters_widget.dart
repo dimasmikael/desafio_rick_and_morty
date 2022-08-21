@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:desafio_rick_and_morty/models/character_model.dart';
+import 'package:desafio_rick_and_morty/shared/image/image-widget/image-widget.dart';
 import 'package:desafio_rick_and_morty/shared/placeHolder/place-holder-image.dart';
 import 'package:desafio_rick_and_morty/shared/size-config/size-config.dart';
 import 'package:desafio_rick_and_morty/shared/style/style_text.dart';
 import 'package:desafio_rick_and_morty/views/details/details_view/details_character_view.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ListCharactersWidget extends StatelessWidget {
   const ListCharactersWidget(
@@ -71,31 +70,9 @@ class ListCharactersWidget extends StatelessWidget {
                           Expanded(
                             child: Stack(
                               children: [
-                                Hero(
-                                  tag: characters?[index].image ??
-                                      loadImagePlaceHolder,
-                                  child: CachedNetworkImage(
-                                    imageUrl: characters?[index].image ??
-                                        loadImagePlaceHolder,
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20),
-                                        ),
-                                        image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ),
-                                    placeholder: (context, i) =>
-                                        const SpinKitFadingCircle(
-                                            color: Colors.amber),
-                                    errorWidget: (context, i, error) =>
-                                        Image.network(loadImagePlaceHolder),
-                                  ),
-                                ),
+                                ImageWidget(
+                                    image: characters?[index]?.image ??
+                                        loadImagePlaceHolder)
                               ],
                             ),
                           ),
@@ -151,7 +128,7 @@ class ListCharactersWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : Container();
+              : const SizedBox();
         },
       ),
     );

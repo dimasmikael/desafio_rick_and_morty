@@ -73,6 +73,39 @@ class _HomeViewState extends State<HomeView>
     }
   }
 
+  Widget _searchTextFieldWidget() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: TextField(
+        key: const Key("addField"),
+        textInputAction: TextInputAction.next,
+        onChanged: (value) {
+          setState(
+            () {
+              searchCharacterFilter = value.toLowerCase();
+            },
+          );
+        },
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          labelText: 'Search',
+          hintText: 'Search',
+          suffixIcon: const Icon(Icons.search),
+        ),
+      ),
+    );
+  }
+
+  Widget _listCharactersWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: ListCharactersWidget(
+          characters: characters, searchCharacterFilter: searchCharacterFilter),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -98,35 +131,9 @@ class _HomeViewState extends State<HomeView>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: TextField(
-                  key: const Key("addField"),
-                  textInputAction: TextInputAction.next,
-                  onChanged: (value) {
-                    setState(
-                      () {
-                        searchCharacterFilter = value.toLowerCase();
-                      },
-                    );
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    labelText: 'Search',
-                    hintText: 'Search',
-                    suffixIcon: const Icon(Icons.search),
-                  ),
-                ),
-              ),
+              _searchTextFieldWidget(),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ListCharactersWidget(
-                      characters: characters,
-                      searchCharacterFilter: searchCharacterFilter),
-                ),
+                child: _listCharactersWidget(),
               ),
             ],
           ),
