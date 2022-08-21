@@ -51,7 +51,7 @@ https://github.com/dimasmikael/desafio_rick_and_morty.git
 
 **Passo 2:**
 
-Abra a pasta do a pasta do projeto na sua IDE.
+Abra a pasta do  projeto na sua IDE.
 
 Android Studio ->File ->Open- localize a abra a pasta do projeto.
 VsCode ->File ->Open folder- localize a abra a pasta do projeto.
