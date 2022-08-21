@@ -8,11 +8,15 @@ Widget makeTestableWidget(Widget widget) => MaterialApp(
 
 void main() {
   testWidgets(
-    "Test the search field",
+    "Test the HomeView search field",
     (WidgetTester tester) async {
       final addField = find.byKey(const ValueKey("addField"));
 
-      await tester.pumpWidget(makeTestableWidget(const HomeView()));
+      await tester.pumpWidget(
+        makeTestableWidget(
+          const HomeView(),
+        ),
+      );
 
       await tester.enterText(addField, "Rick");
 
